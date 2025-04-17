@@ -1,4 +1,4 @@
-# CDP Node.js Environment Test Suite Template
+fcp-dal-api-postdeployment-test
 
 The template to create a service that runs WDIO tests against an environment.
 
