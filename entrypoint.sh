@@ -1,6 +1,27 @@
 #!/bin/sh
 
 echo "run_id: $RUN_ID"
+
+# Get an auth token
+auth_url=https://login.microsoftonline.com/${TENANT_ID:?required secret not set!}/oauth2/v2.0/token
+client_auth=`echo -n "${CLIENT_ID:?required secret not set!}:${CLIENT_SECRET:?required secret not set!}" | base64  | tr -d '\n'`
+AUTH_TOKEN=`curl -s \
+  --connect-timeout 5 \
+  -x ${HTTP_PROXY:?required env var not set!} \
+  -L ${auth_url} \
+  -H "Authorization: Basic ${client_auth}" \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  --data 'grant_type=client_credentials' \
+  --data "scope=${CLIENT_SCOPE:?required secret not set!}" \
+| jq -r '.access_token'`
+
+# fast-fail when no token available!
+if [ -z "${auth_token}" ] ; then
+  echo ERROR! Exiting because an auth token could not be retrieved
+  exit 2
+fi
+
+export AUTH_TOKEN
 npm test
 
 npm run report:publish
