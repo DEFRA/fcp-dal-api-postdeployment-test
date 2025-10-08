@@ -10,4 +10,4 @@ describe('GetPermissionsGroups', () => {
     const res = await makePostCall(await getGetPermissionsGroupsGqlQuery())
     expect(res.status).equal(200);
   })
-}
+})
