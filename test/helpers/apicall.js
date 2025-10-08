@@ -1,5 +1,10 @@
-let gqlUrl = 'https://fcp-dal-api.' + process.env.ENVIRONMENT + '.cdp-int.defra.cloud$/graphql';
-let config = {
+const axios = require('axios')
+
+const gqlUrl =
+  'https://fcp-dal-api.' +
+  process.env.ENVIRONMENT +
+  '.cdp-int.defra.cloud$/graphql'
+const config = {
   headers: {
     Email: 'test.user01@defra.gov.uk',
     'Content-type': 'application/json',
@@ -7,7 +12,7 @@ let config = {
   }
 }
 
-async function makePostCall(gqlQueryString) {
+export async function makePostCall(gqlQueryString) {
   return axios.post({
     url: gqlUrl,
     data: {
