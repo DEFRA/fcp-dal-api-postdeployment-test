@@ -8,11 +8,11 @@ let config = {
 }
 
 async function makePostCall(gqlQueryString) {
-  return axios.post(
+  return axios.post({
     url: gqlUrl,
     data: {
       query: gqlQueryString
     },
     config
-  )
+  })
 }
