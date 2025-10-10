@@ -1,6 +1,6 @@
 // import { browser, expect } from '@wdio/globals'
-import { getGetPermissionsGroupsGqlQuery } from '../../../../../../../../../../test/helpers/graphqlqueries.js'
-import { makePostCall } from '../../../../../../../../../../test/helpers/apicall.js'
+import { getGetPermissionsGroupsGqlQuery } from '../helpers/graphqlqueries.js'
+import { makePostCall } from '../helpers/apicall.js'
 
 const { expect } = require('chai')
 
