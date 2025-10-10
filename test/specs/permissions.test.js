@@ -1,8 +1,7 @@
-// import { browser, expect } from '@wdio/globals'
 import { getGetPermissionsGroupsGqlQuery } from '../helpers/graphqlqueries.js'
 import { makePostCall } from '../helpers/apicall.js'
 
-const { expect } = require('chai')
+const { expect } = require('chai').expect
 
 describe('GetPermissionsGroups', () => {
   it('Should be on the "Home" page', async () => {
