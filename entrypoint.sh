@@ -21,7 +21,7 @@ if [ -z "${auth_token}" ] ; then
   exit 2
 fi
 
-export AUTH_TOKEN
+export AUTH_TOKEN=auth_url
 npm test
 
 npm run report:publish
