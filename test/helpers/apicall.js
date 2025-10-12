@@ -13,7 +13,7 @@ const config = {
 }
 
 export async function makePostCall(gqlQueryString) {
-  return axios.post({
+  return await axios.post({
     url: gqlUrl,
     data: {
       query: gqlQueryString
