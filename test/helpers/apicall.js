@@ -6,11 +6,15 @@ const gqlUrl =
   // 'dev' +
   '.cdp-int.defra.cloud/graphql'
 
-export async function makePostCall(gqlQueryString) {
+export async function makePostCall(
+  gqlQueryString,
+  gqlVariablesJsonString = '{}'
+) {
   const apiResult = await axios.post(
     gqlUrl,
     {
-      query: gqlQueryString
+      query: gqlQueryString,
+      variables: JSON.parse(gqlVariablesJsonString)
     },
     {
       returnRejectedPromiseOnError: true,
