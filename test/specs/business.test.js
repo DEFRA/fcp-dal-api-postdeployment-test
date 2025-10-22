@@ -4,9 +4,7 @@ import { expect } from 'chai'
 
 describe('GetBusinessDetails', () => {
   it('Business details should be returned OK', async () => {
-    const jqlVars = `{
-              'sbi': '114301879'
-            }`
+    const jqlVars = '{ "sbi": "114301879"}'
 
     const businessQuery = getGetBusinessDetailsGqlQuery()
     const res = await makePostCall(businessQuery, jqlVars)
