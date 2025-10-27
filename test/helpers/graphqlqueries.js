@@ -9,6 +9,23 @@ export function getGetPermissionsGroupsGqlQuery() {
          `
 }
 
+export function getToggleBusinessLockGqlQuery() {
+  return `mutation UnlockBusiness ($input: UpdateBusinessLockUnlockInput!) {
+                  updateBusinessUnlock(input: $input) {
+                      success
+                      business {
+                          sbi
+                          info {
+                              status {
+                                  locked
+                              }
+                          }
+                      }
+                  }
+        }
+        `
+}
+
 export function getGetBusinessDetailsGqlQuery() {
   return `query GetBusinessDetails($sbi: ID!) {
             business(sbi: $sbi) {
