@@ -9,6 +9,113 @@ export function getGetPermissionsGroupsGqlQuery() {
          `
 }
 
+export function getGetMessagesGqlQuery() {
+  return `query BusinessMessages($crn: ID!, $sbi: ID!) {
+          	customer(crn: $crn) {
+          		personId
+          		crn
+          		business(sbi: $sbi) {
+          			messages {
+          				id
+          				subject
+          				date
+          				body
+          				read
+          				deleted
+          			}
+          		}
+          	}
+          }
+         `
+}
+
+export function getGetAuthorisationsGqlQuery() {
+  return `query Customer ($crn: ID!, $sbi: ID!) {
+          	customer(crn: $crn) {
+          		crn
+          		business(sbi: $sbi) {
+          			role
+          			permissionGroups {
+          				level
+          				id
+          			}
+          		}
+          	}
+          }
+         `
+}
+
+export function getGetAuthenticateQuestionsGqlQuery() {
+  return `query Customer ($crn: ID!) {
+          	customer(crn: $crn) {
+          		crn
+          		authenticationQuestions {
+          			isFound
+          			updatedAt
+          			memorableDate
+          			memorableEvent
+          			memorableLocation
+          		}
+          	}
+          }
+         `
+}
+
+export function getGetCustomerDetailsGqlQuery() {
+  return `query GetCustomerDetails($crn: ID!) {
+            customer(crn: $crn) {
+              crn
+              personId
+              info {
+                name {
+                  title
+                  otherTitle
+                  first
+                  middle
+                  last
+                }
+                dateOfBirth
+                phone {
+                  mobile
+                  landline
+                }
+                email {
+                  address
+                  validated
+                }
+                status {
+                  locked
+                  confirmed
+                  deactivated
+                }
+                address {
+                  pafOrganisationName
+                  line1
+                  line2
+                  line3
+                  line4
+                  line5
+                  buildingNumberRange
+                  buildingName
+                  flatName
+                  street
+                  city
+                  county
+                  postalCode
+                  country
+                  uprn
+                  dependentLocality
+                  doubleDependentLocality
+                  typeId
+                }
+                doNotContact
+                personalIdentifiers
+              }
+            }
+          }
+         `
+}
+
 export function getToggleBusinessLockGqlQuery() {
   return `mutation UnlockBusiness ($input: UpdateBusinessLockUnlockInput!) {
                   updateBusinessUnlock(input: $input) {
