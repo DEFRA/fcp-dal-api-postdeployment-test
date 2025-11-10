@@ -9,6 +9,58 @@ export function getGetPermissionsGroupsGqlQuery() {
          `
 }
 
+export function getGetCphGqlQuery() {
+  return `query GetCph($sbi: ID!) {
+            business(sbi: $sbi) {
+              countyParishHoldings {
+                address
+                cphNumber
+                endDate
+                parish
+                species
+                startDate
+                xCoordinate
+                yCoordinate
+              }
+            }
+          }
+         `
+}
+
+export function getGetLandParcelsGqlQuery() {
+  return `query GetLandParcels($sbi: ID!) {
+            business(sbi: $sbi) {
+              land {
+                parcels {
+                  area
+                  id
+                  parcelId
+                  pendingDigitisation
+                  sheetId
+                }
+              }
+            }
+          }
+         `
+}
+
+export function getGetLandCoverSummaryGqlQuery() {
+  return `query GetLandCoverSummary($sbi: ID!) {
+            business(sbi: $sbi) {
+              land {
+                summary {
+                  arableLandArea
+                  permanentCropsArea
+                  permanentGrasslandArea
+                  totalArea
+                  totalParcels
+                }
+              }
+            }
+          }
+         `
+}
+
 export function getGetMessagesGqlQuery() {
   return `query BusinessMessages($crn: ID!, $sbi: ID!) {
           	customer(crn: $crn) {
