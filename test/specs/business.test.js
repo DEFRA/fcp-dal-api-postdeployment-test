@@ -4,7 +4,10 @@ import {
   getGetMessagesGqlQuery,
   getGetAuthorisationsGqlQuery,
   getGetAuthenticateQuestionsGqlQuery,
-  getGetCustomerDetailsGqlQuery
+  getGetCustomerDetailsGqlQuery,
+  getGetCphGqlQuery,
+  getGetLandParcelsGqlQuery,
+  getGetLandCoverSummaryGqlQuery
 } from '../helpers/graphqlqueries.js'
 import { makePostCall } from '../helpers/apicall.js'
 import { expect } from 'chai'
@@ -64,6 +67,36 @@ describe('Get customer details', () => {
     const jqlVars = '{ "crn": "1111111100" }'
 
     const businessQuery = getGetCustomerDetailsGqlQuery()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Get CPH details', () => {
+  it('CPH details should be returned OK', async () => {
+    const jqlVars = '{ "sbi": "114301879"}'
+
+    const businessQuery = getGetCphGqlQuery()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Get land parcel details', () => {
+  it('Land parcel details should be returned OK', async () => {
+    const jqlVars = '{ "sbi": "114301879"}'
+
+    const businessQuery = getGetLandParcelsGqlQuery()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Get Land Cover Summary details', () => {
+  it('Land cover summary details should be returned OK', async () => {
+    const jqlVars = '{ "sbi": "114301879"}'
+
+    const businessQuery = getGetLandCoverSummaryGqlQuery()
     const res = await makePostCall(businessQuery, jqlVars)
     expect(res.status).to.equal(200)
   })
