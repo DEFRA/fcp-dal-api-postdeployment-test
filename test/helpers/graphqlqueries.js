@@ -9,6 +9,265 @@ export function getGetPermissionsGroupsGqlQuery() {
          `
 }
 
+export function getGetBusinessesCustomersGqlQuery() {
+  return `query BusinessCustomers ($sbi: ID!) {
+          	business(sbi: $sbi) {
+          		customers {
+                    	crn
+                    	role
+          		}
+          	}
+          }
+         `
+}
+
+export function getGetCustomerBusinessesGqlQuery() {
+  return `query Query ($crn: ID!) {
+          	customer(crn: $crn) {
+          		businesses {
+          			name
+          		}
+          		crn
+          		personId
+          	}
+          }
+
+         `
+}
+
+export function getGetCustomersBusinessPermissionsGroupsGqlQuery() {
+  return `query Customer ($crn: ID!, $sbi: ID!) {
+          	customer(crn: $crn) {
+          		crn
+          		business(sbi: $sbi) {
+          			role
+          			permissionGroups {
+          				level
+          				id
+          			}
+          		}
+          	}
+          }
+         `
+}
+
+export function getGetLandCoversGqlQuery() {
+  return `query GetLandCovers($sbi: ID!, $sheetId: ID!, $parcelId: ID!) {
+            business(sbi: $sbi) {
+              land {
+                parcelCovers(sheetId: $sheetId, parcelId: $parcelId) {
+                  area
+                  code
+                  id
+                  isBpsEligible
+                  name
+                }
+              }
+            }
+          }
+         `
+}
+
+export function getGetAgreementsGqlQuery() {
+  return `query Agreements ($sbi: ID!) {
+              business(sbi: $sbi) {
+                  agreements {
+                      contractId
+                      name
+                      status
+                      contractType
+                      schemeYear
+                      startDate
+                      endDate
+                      paymentSchedules {
+                          optionCode
+                          optionDescription
+                          commitmentGroupStartDate
+                          commitmentGroupEndDate
+                          year
+                          sheetName
+                          parcelName
+                          actionArea
+                          actionMTL
+                          actionUnits
+                          parcelTotalArea
+                          startDate
+                          endDate
+                      }
+                  }
+              }
+          }
+         `
+}
+
+export function getGetApplicationsGqlQuery() {
+  return `query Applications ($sbi: ID!) {
+              business(sbi: $sbi) {
+                applications {
+                  sbi
+                  id
+                  subjectId
+                  year
+                  name
+                  moduleCode
+                  scheme
+                  statusCodeP
+                  statusCodeS
+                  status
+                  submissionDate
+                  portalStatusP
+                  portalStatusS
+                  portalStatus
+                  active
+                  transitionId
+                  transitionName
+                  agreementReferences
+                  transitionHistory {
+                    id
+                    name
+                    timestamp
+                    checkStatus
+                  }
+                }
+              }
+          }
+         `
+}
+
+export function getCreateBusinessGqlMutation() {
+  return `mutation {
+            createBusiness(input:{crn:"1100077049",name:"AcmeFarmsLtd",vat:"GB123456789",traderNumber:"TR12345",vendorNumber:"VN67890",correspondenceAddress:{line1:"POBox123",city:"Farmville",postalCode:"FV12AB",country:"UK"},typeCode:2,email:{address:"info@acmefarms.co.uk"},correspondenceEmail:{address:"correspondence@acmefarms.co.uk"},phone:{landline:"+441234567890",mobile:"+441234567891"},correspondencePhone:{landline:"+441234567892"},legalStatusCode:1,registrationNumbers:{companiesHouse:"12345678",charityCommission:"87654321"},landConfirmed:true,dateStartedFarming:"2021-05-27T12:46:17.305Z"}
+            ){
+              success
+              business {
+                info {
+                  address {
+                    buildingName
+                    buildingNumberRange
+                    city
+                    country
+                    pafOrganisationName
+                    line1
+                    line2
+                    line3
+                    line4
+                    line5
+                    flatName
+                    street
+                    county
+                    postalCode
+                    uprn
+                    dependentLocality
+                    doubleDependentLocality
+                    typeId
+                  }
+                  correspondenceAddress {
+                    line1
+                    line2
+                    line3
+                    line4
+                    pafOrganisationName
+                    line5
+                    buildingNumberRange
+                    buildingName
+                    flatName
+                    street
+                    city
+                    county
+                    postalCode
+                    country
+                    uprn
+                    dependentLocality
+                    doubleDependentLocality
+                    typeId
+                  }
+                  name
+                  reference
+                  vat
+                  traderNumber
+                  vendorNumber
+                  isCorrespondenceAsBusinessAddress
+                  email {
+                    address
+                    validated
+                  }
+                  correspondenceEmail {
+                    address
+                    validated
+                  }
+                  phone {
+                    mobile
+                    landline
+                  }
+                  correspondencePhone {
+                    mobile
+                    landline
+                  }
+                  legalStatus {
+                    code
+                    type
+                  }
+                  type {
+                    code
+                    type
+                  }
+                  registrationNumbers {
+                    companiesHouse
+                    charityCommission
+                  }
+                  landConfirmed
+                  dateStartedFarming
+                }
+              }
+            }
+          }
+         `
+}
+
+export function getUpdateBusinessNameGqlMutation() {
+  return `mutation {
+            updateBusinessName(input: {sbi: "107209382",name: "newname"}) {
+              success
+              business {
+                sbi
+              }
+            }
+          }
+         `
+}
+
+export function getUpdatePersonGqlMutation() {
+  return `mutation {
+            updateCustomerAddress(input: { crn: "1100077049", address: { buildingName: "newBuildingName", buildingNumberRange: "newBuildingNumberRange", city: "newCity", country: "newCountry", county: "newCounty", dependentLocality: "newDependentLocality", doubleDependentLocality: "newDoubleDependentLocality", flatName: "newFlatName", line1: "newLine1", line2: "newLine2", line3: "newLine3", line4: "newLine4", line5: "newLine5", pafOrganisationName: "newPafOrganisationName", postalCode: "newPostalCode", street: "newStreet", uprn: "newUprn"} }) {
+              success
+              customer {
+                info {
+                  address {
+                    pafOrganisationName
+                    line1
+                    line2
+                    line3
+                    line4
+                    line5
+                    buildingNumberRange
+                    buildingName
+                    flatName
+                    street
+                    city
+                    county
+                    postalCode
+                    country
+                    uprn
+                    dependentLocality
+                    doubleDependentLocality
+                  }
+                }
+              }
+            }
+          }
+         `
+}
+
 export function getGetCphGqlQuery() {
   return `query GetCph($sbi: ID!) {
             business(sbi: $sbi) {
