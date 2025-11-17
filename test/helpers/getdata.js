@@ -1,66 +1,37 @@
-const csv = require('csv-parser')
-const fs = require('fs')
-const sbiResults = []
-const crnResults = []
-const landResults = []
-const sbiCrnPairResults = []
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-fs.createReadStream('../data/dev/sbi.csv')
-  .pipe(csv())
-  .on('data', (data) => sbiResults.push(data))
-  .on('end', () => {
-    //  console.log(sbiResults)
-    // [
-    //   { NAME: 'Daffy Duck', AGE: '24' },
-    //   { NAME: 'Bugs Bunny', AGE: '22' }
-    // ]
-  })
-
-fs.createReadStream('../data/dev/crn.csv')
-  .pipe(csv())
-  .on('data', (data) => crnResults.push(data))
-  .on('end', () => {
-    //  console.log(crnResults)
-    // [
-    //   { NAME: 'Daffy Duck', AGE: '24' },
-    //   { NAME: 'Bugs Bunny', AGE: '22' }
-    // ]
-  })
-
-fs.createReadStream('../data/dev/land.csv')
-  .pipe(csv())
-  .on('data', (data) => landResults.push(data))
-  .on('end', () => {
-    //  console.log(landResults)
-    // [
-    //   { NAME: 'Daffy Duck', AGE: '24' },
-    //   { NAME: 'Bugs Bunny', AGE: '22' }
-    // ]
-  })
-
-fs.createReadStream('../data/dev/sbi-crn-pair.csv')
-  .pipe(csv())
-  .on('data', (data) => sbiCrnPairResults.push(data))
-  .on('end', () => {
-    //  console.log(sbiCrnPairResults)
-    // [
-    //   { NAME: 'Daffy Duck', AGE: '24' },
-    //   { NAME: 'Bugs Bunny', AGE: '22' }
-    // ]
-  })
+const __filename = fileURLToPath(import.meta.url) // get the resolved path to the file
+const __dirname = path.dirname(__filename) // get the name of the directory
 
 export function getSbi() {
-  return sbiResults[Math.floor(Math.random() * sbiResults.length)].SBI
+  const sbis = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, '../data/dev/sbi.json'), 'utf8')
+  )
+  return sbis[Math.floor(Math.random() * sbis.length)]
 }
 
 export function getCrn() {
-  return crnResults[Math.floor(Math.random() * crnResults.length)].CRN
+  const crns = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, '../data/dev/crn.json'), 'utf8')
+  )
+  return crns[Math.floor(Math.random() * crns.length)]
 }
 
 export function getLandData() {
-  return landResults[Math.floor(Math.random() * landResults.length)]
+  const landdata = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, '../data/dev/land.json'), 'utf8')
+  )
+  return landdata[Math.floor(Math.random() * landdata.length)]
 }
 
 export function getSbiCrnPair() {
-  return sbiCrnPairResults[Math.floor(Math.random() * sbiCrnPairResults.length)]
+  const sbiCrns = JSON.parse(
+    fs.readFileSync(
+      path.resolve(__dirname, '../data/dev/sbi-crn-pair.json'),
+      'utf8'
+    )
+  )
+  return sbiCrns[Math.floor(Math.random() * sbiCrns.length)]
 }

@@ -17,8 +17,9 @@ describe('Get permissions groups', () => {
 describe('Get customers business permission groups', () => {
   it('Customers business permission groups should be returned OK', async () => {
     const sbiCrnPair = getSbiCrnPair()
-    const sbi = sbiCrnPair.SBI
-    const crn = sbiCrnPair.CRN
+    const sbi = sbiCrnPair.SBI.toString()
+    const crn = sbiCrnPair.CRN.toString()
+
     const jqlVars = '{ "sbi": "' + sbi + '", "crn": "' + crn + '" }'
 
     const permissionsQuery = getGetCustomersBusinessPermissionsGroupsGqlQuery()
