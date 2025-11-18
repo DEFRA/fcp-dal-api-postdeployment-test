@@ -134,9 +134,9 @@ export function getGetApplicationsGqlQuery() {
          `
 }
 
-export function getCreateBusinessGqlMutation() {
+export function getCreateBusinessGqlMutation(crn) {
   return `mutation {
-            createBusiness(input:{crn:"1100077049",name:"AcmeFarmsLtd",vat:"GB123456789",traderNumber:"TR12345",vendorNumber:"VN67890",correspondenceAddress:{line1:"POBox123",city:"Farmville",postalCode:"FV12AB",country:"UK"},typeCode:2,email:{address:"info@acmefarms.co.uk"},correspondenceEmail:{address:"correspondence@acmefarms.co.uk"},phone:{landline:"+441234567890",mobile:"+441234567891"},correspondencePhone:{landline:"+441234567892"},legalStatusCode:1,registrationNumbers:{companiesHouse:"12345678",charityCommission:"87654321"},landConfirmed:true,dateStartedFarming:"2021-05-27T12:46:17.305Z"}
+            createBusiness(input:{crn:${crn}, name:"AcmeFarmsLtd",vat:"GB123456789",traderNumber:"TR12345",vendorNumber:"VN67890",correspondenceAddress:{line1:"POBox123",city:"Farmville",postalCode:"FV12AB",country:"UK"},typeCode:2,email:{address:"info@acmefarms.co.uk"},correspondenceEmail:{address:"correspondence@acmefarms.co.uk"},phone:{landline:"+441234567890",mobile:"+441234567891"},correspondencePhone:{landline:"+441234567892"},legalStatusCode:1,registrationNumbers:{companiesHouse:"12345678",charityCommission:"87654321"},landConfirmed:true,dateStartedFarming:"2021-05-27T12:46:17.305Z"}
             ){
               success
               business {
@@ -224,9 +224,9 @@ export function getCreateBusinessGqlMutation() {
          `
 }
 
-export function getUpdateBusinessNameGqlMutation() {
+export function getUpdateBusinessNameGqlMutation(sbi) {
   return `mutation {
-            updateBusinessName(input: {sbi: "107209382",name: "newname"}) {
+            updateBusinessName(input: {sbi: "${sbi}",name: "newname"}) {
               success
               business {
                 sbi
@@ -236,9 +236,9 @@ export function getUpdateBusinessNameGqlMutation() {
          `
 }
 
-export function getUpdatePersonGqlMutation() {
+export function getUpdatePersonGqlMutation(crn) {
   return `mutation {
-            updateCustomerAddress(input: { crn: "1100077049", address: { buildingName: "newBuildingName", buildingNumberRange: "newBuildingNumberRange", city: "newCity", country: "newCountry", county: "newCounty", dependentLocality: "newDependentLocality", doubleDependentLocality: "newDoubleDependentLocality", flatName: "newFlatName", line1: "newLine1", line2: "newLine2", line3: "newLine3", line4: "newLine4", line5: "newLine5", pafOrganisationName: "newPafOrganisationName", postalCode: "newPostalCode", street: "newStreet", uprn: "newUprn"} }) {
+            updateCustomerAddress(input: { crn: "${crn}", address: { buildingName: "newBuildingName", buildingNumberRange: "newBuildingNumberRange", city: "newCity", country: "newCountry", county: "newCounty", dependentLocality: "newDependentLocality", doubleDependentLocality: "newDoubleDependentLocality", flatName: "newFlatName", line1: "newLine1", line2: "newLine2", line3: "newLine3", line4: "newLine4", line5: "newLine5", pafOrganisationName: "newPafOrganisationName", postalCode: "newPostalCode", street: "newStreet", uprn: "newUprn"} }) {
               success
               customer {
                 info {
