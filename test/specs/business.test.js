@@ -176,7 +176,7 @@ describe('Get Applications', () => {
 
 describe('Create business', () => {
   it('A new business can be created', async () => {
-    const crn = getCrn().CRN
+    const crn = getCrn().CRN.toString()
     const businessQuery = getCreateBusinessGqlMutation(crn)
     const res = await makePostCall(businessQuery)
     expect(res.status).to.equal(200)
