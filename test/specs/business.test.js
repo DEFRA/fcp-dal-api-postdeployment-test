@@ -15,7 +15,8 @@ import {
   getUpdateBusinessNameGqlMutation,
   getUpdatePersonGqlMutation,
   getGetBusinessesCustomersGqlQuery,
-  getGetCustomerBusinessesGqlQuery
+  getGetCustomerBusinessesGqlQuery,
+  getGetLandUsesGqlQuery
 } from '../helpers/graphqlqueries.js'
 import {
   getSbiCrnPair,
@@ -218,6 +219,27 @@ describe('Get Customers businesses', () => {
     const jqlVars = '{ "crn": "' + crn + '" }'
 
     const businessQuery = getGetCustomerBusinessesGqlQuery()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Get a businesses land uses', () => {
+  it('A businesses land uses should be returned OK', async () => {
+    const landData = getLandData()
+    const sbi = landData.SBI.toString()
+    const sheetId = landData.SHEETID.toString()
+    const parcelId = landData.PARCELID.toString()
+    const jqlVars =
+      '{"sbi":"' +
+      sbi +
+      '","sheetId":"' +
+      sheetId +
+      '","parcelId":"' +
+      parcelId +
+      '"}'
+
+    const businessQuery = getGetLandUsesGqlQuery()
     const res = await makePostCall(businessQuery, jqlVars)
     expect(res.status).to.equal(200)
   })
