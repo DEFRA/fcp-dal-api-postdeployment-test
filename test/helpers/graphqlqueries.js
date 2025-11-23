@@ -68,6 +68,27 @@ export function getGetLandCoversGqlQuery() {
          `
 }
 
+export function getGetLandUsesGqlQuery() {
+  return `query GetLandUses($sbi: ID!, $sheetId: ID!, $parcelId: ID!) {
+            business(sbi: $sbi) {
+              land {
+                parcelLandUses(sheetId: $sheetId, parcelId: $parcelId) {
+                  code
+                  startDate
+                  endDate
+                  insertDate
+                  deleteDate
+                  area
+                  length
+                  type
+                  campaign
+                }
+              }
+            }
+          }
+         `
+}
+
 export function getGetAgreementsGqlQuery() {
   return `query Agreements ($sbi: ID!) {
               business(sbi: $sbi) {
