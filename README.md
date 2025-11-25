@@ -1,6 +1,6 @@
 fcp-dal-api-postdeployment-test
 
-The template to create a service that runs WDIO tests against an environment.
+This repo holds a suite of API tests for the DAL.
 
 - [Local](#local)
   - [Requirements](#requirements)
@@ -38,16 +38,10 @@ npm install
 
 ### Running local tests
 
-Start application you are testing on the url specified in `baseUrl` [wdio.local.conf.js](wdio.local.conf.js)
+Start application you are testing on the url specified in the `gqlUrl` in apicall.js.
 
 ```bash
-npm run test:local
-```
-
-### Debugging local tests
-
-```bash
-npm run test:local:debug
+npm run test
 ```
 
 ## Production
@@ -69,7 +63,27 @@ The results of the test run are made available in the portal.
 
 3. Test reports should be published to S3 using the script in `./bin/publish-tests.sh`
 
+## Notes on test implementation
+
+The key parts to this suite are as follows:
+
+- package.json - contains the npm commands to start the tests
+- runner.mjs - used to configure the tests to run and report correctly
+- test/data - this contains folders for each of the CDP environments with data files specifically for that environment
+- test/helpers - contains code for making calls, reading data and getting queries
+- test/specs - the tests themselves
+
+### Switching environments
+
+In CDP an ENVIRONMENT variable is set.This variable is used to (a) set the correct URL in apicall.js and (b) set the correct data set in getdata.js
+
+### Authentication
+
+In certain environments an authentication token is required, this is created and stored in entrypoint.sh. It is then referenced in apicall.js
+
 ## Running on GitHub
+
+THE FOLLOWING IS TEMPLATE TEXT, WE HAVE NOT YET IMPLEMENTED GITHUB WORKFLOW RUNNING.
 
 Alternatively you can run the test suite as a GitHub workflow.
 Test runs on GitHub are not able to connect to the CDP Test environments. Instead, they run the tests agains a version of the services running in docker.
@@ -85,12 +99,6 @@ Steps:
 By default, the provided workflow will run when triggered manually from GitHub or when triggered by another workflow.
 
 If you want to use the repository exclusively for running docker composed based test suites consider displaying the publish.yml workflow.
-
-## BrowserStack
-
-Two wdio configuration files are provided to help run the tests using BrowserStack in both a GitHub workflow (`wdio.github.browserstack.conf.js`) and from the CDP Portal (`wdio.browserstack.conf.js`).
-They can be run from npm using the `npm run test:browserstack` (for running via portal) and `npm run test:github:browserstack` (from GitHib runner).
-See the CDP Documentation for more details.
 
 ## Licence
 
