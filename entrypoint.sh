@@ -2,12 +2,11 @@
 
 echo "run_id: $RUN_ID"
 
-if [ ${ENVIRONMENT} = "test" || ${ENVIRONMENT} = "ext-test" || ${ENVIRONMENT} = "perf-test"]
-then
+if [ "${ENVIRONMENT}" = "test" ] || [ "${ENVIRONMENT}" = "ext-test" ] || [ "${ENVIRONMENT}" = "perf-test" ]; then
   # Get an auth token
   auth_url=https://login.microsoftonline.com/${TENANT_ID:?required secret not set!}/oauth2/v2.0/token
   client_auth=`echo -n "${CLIENT_ID:?required secret not set!}:${CLIENT_SECRET:?required secret not set!}" | base64  | tr -d '\n'`
-  AUTH_TOKEN_LOC=`curl -s \
+  auth_token=`curl -s \
     --connect-timeout 5 \
     -x ${HTTP_PROXY:?required env var not set!} \
     -L ${auth_url} \
@@ -21,10 +20,10 @@ then
   if [ -z "${auth_token}" ] ; then
     echo ERROR! Exiting because an auth token could not be retrieved
     exit 2
-  fi
-fi
+  fi;
+fi;
 
-npm test -- --AUTH_TOKEN=$AUTH_TOKEN_LOC
+npm test -- --AUTH_TOKEN="${auth_token}"
 
 npm run report:publish
 publish_exit_code=$?
