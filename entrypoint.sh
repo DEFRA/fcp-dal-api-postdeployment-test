@@ -2,7 +2,7 @@
 
 echo "run_id: $RUN_ID"
 
-if [ ${ENVIRONMENT} = "test" || ${ENVIRONMENT} = "ext-test"]
+if [ ${ENVIRONMENT} = "test" || ${ENVIRONMENT} = "ext-test" || ${ENVIRONMENT} = "ext-test"]
 then
   # Get an auth token
   auth_url=https://login.microsoftonline.com/${TENANT_ID:?required secret not set!}/oauth2/v2.0/token
