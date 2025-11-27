@@ -7,8 +7,9 @@ USER root
 RUN apk add --no-cache \
     openjdk17-jre-headless \
     curl \
-    aws-cli \
-    jq
+    aws-cli
+
+RUN apk add --no-cache jq
 
 WORKDIR /app
 
