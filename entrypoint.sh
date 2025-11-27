@@ -24,8 +24,7 @@ then
   fi
 fi
 
-export AUTH_TOKEN=$AUTH_TOKEN_LOC
-npm test
+npm test -- --AUTH_TOKEN=$AUTH_TOKEN_LOC
 
 npm run report:publish
 publish_exit_code=$?
