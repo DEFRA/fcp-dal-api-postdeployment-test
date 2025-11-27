@@ -7,7 +7,7 @@ then
   # Get an auth token
   auth_url=https://login.microsoftonline.com/${TENANT_ID:?required secret not set!}/oauth2/v2.0/token
   client_auth=`echo -n "${CLIENT_ID:?required secret not set!}:${CLIENT_SECRET:?required secret not set!}" | base64  | tr -d '\n'`
-  AUTH_TOKEN=`curl -s \
+  AUTH_TOKEN_LOC=`curl -s \
     --connect-timeout 5 \
     -x ${HTTP_PROXY:?required env var not set!} \
     -L ${auth_url} \
@@ -24,7 +24,7 @@ then
   fi
 fi
 
-#export AUTH_TOKEN=auth_url
+export AUTH_TOKEN=AUTH_TOKEN_LOC
 npm test
 
 npm run report:publish
