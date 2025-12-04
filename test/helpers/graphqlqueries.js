@@ -122,42 +122,42 @@ export function getGetAgreementsGqlQuery() {
 }
 
 export function getGetApplicationsGqlQuery() {
-  return `query Applications ($sbi: ID!) {
-              business(sbi: $sbi) {
-                applications {
-                  sbi
+  return `query Applications($sbi: ID!) {
+            business(sbi: $sbi) {
+              applications {
+                sbi
+                id
+                subjectId
+                year
+                name
+                moduleCode
+                scheme
+                statusCodeP
+                statusCodeS
+                status
+                submissionDate
+                portalStatusP
+                portalStatusS
+                portalStatus
+                active
+                transitionId
+                transitionName
+                agreementReferences
+                transitionHistory {
                   id
-                  subjectId
-                  year
                   name
-                  moduleCode
-                  scheme
-                  statusCodeP
-                  statusCodeS
-                  status
-                  submissionDate
-                  portalStatusP
-                  portalStatusS
-                  portalStatus
-                  active
-                  transitionId
-                  transitionName
-                  agreementReferences
-                  transitionHistory {
-                    id
-                    name
-                    timestamp
-                    checkStatus
-                  }
+                  timestamp
+                  checkStatus
                 }
               }
+            }
           }
          `
 }
 
 export function getCreateBusinessGqlMutation(crn) {
   return `mutation {
-            createBusiness(input:{crn:${crn}, name:"AcmeFarmsLtd",vat:"GB123456789",traderNumber:"TR12345",vendorNumber:"VN67890",correspondenceAddress:{line1:"POBox123",city:"Farmville",postalCode:"FV12AB",country:"UK"},typeCode:2,email:{address:"info@acmefarms.co.uk"},correspondenceEmail:{address:"correspondence@acmefarms.co.uk"},phone:{landline:"+441234567890",mobile:"+441234567891"},correspondencePhone:{landline:"+441234567892"},legalStatusCode:1,registrationNumbers:{companiesHouse:"12345678",charityCommission:"87654321"},landConfirmed:true,dateStartedFarming:"2021-05-27T12:46:17.305Z"}
+            createBusiness(input:{crn:${crn}, name:"AcmeFarmsLtd",vat:"GB123456789",traderNumber:"TR12345",vendorNumber:"VN67890",address:{withoutUprn:{line1:"1 Farm Lane",line2:"Rural Area",city:"Farmville",postalCode:"FV1 2AB",country:"UK"}},correspondenceAddress:{withoutUprn:{line1:"POBox123",city:"Farmville",postalCode:"FV12AB",country:"UK"}},typeCode:2,email:{address:"info@acmefarms.co.uk"},correspondenceEmail:{address:"correspondence@acmefarms.co.uk"},phone:{landline:"+441234567890",mobile:"+441234567891"},correspondencePhone:{landline:"+441234567892"},legalStatusCode:1,registrationNumbers:{companiesHouse:"12345678",charityCommission:"87654321"},landConfirmed:true,dateStartedFarming:"2021-05-27T12:46:17.305Z"}
             ){
               success
               business {
