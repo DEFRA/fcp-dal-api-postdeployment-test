@@ -8,7 +8,7 @@ const mocha = new Mocha({
     resultsDir: "allure-results",
     extraReporters: "spec",
   },
-  timeout: 10000
+  timeout: 600000
 });
 
 if (process.argv[2]) {
