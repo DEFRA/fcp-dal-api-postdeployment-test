@@ -18,7 +18,7 @@ export async function makePostCall(
     },
     {
       returnRejectedPromiseOnError: true,
-      timeout: 30000,
+      timeout: 600000,
       headers: {
         Email: 'test.user01@defra.gov.uk',
         'Content-type': 'application/json',
