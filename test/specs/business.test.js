@@ -16,7 +16,8 @@ import {
   getUpdatePersonGqlMutation,
   getGetBusinessesCustomersGqlQuery,
   getGetCustomerBusinessesGqlQuery,
-  getGetLandUsesGqlQuery
+  getGetLandUsesGqlQuery,
+  getGetPaymentsGqlQuery
 } from '../helpers/graphqlqueries.js'
 import {
   getSbiCrnPair,
@@ -94,6 +95,17 @@ describe('Get customer details', () => {
     const jqlVars = '{ "crn": "' + crn + '" }'
 
     const businessQuery = getGetCustomerDetailsGqlQuery()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Get payment details', () => {
+  it('Business payment should be returned OK', async () => {
+    const sbi = getSbi().SBI.toString()
+    const jqlVars = '{"sbi":"' + sbi + '","userIp":"192.168.1.1"}'
+
+    const businessQuery = getGetPaymentsGqlQuery()
     const res = await makePostCall(businessQuery, jqlVars)
     expect(res.status).to.equal(200)
   })
