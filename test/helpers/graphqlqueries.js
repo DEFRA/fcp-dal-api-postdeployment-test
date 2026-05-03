@@ -21,6 +21,30 @@ export function getGetBusinessesCustomersGqlQuery() {
          `
 }
 
+export function getGetPaymentsGqlQuery() {
+  return `query GetPayments($sbi: ID!, $userIp: String!) {
+            business(sbi: $sbi) {
+              payments(userIP: $userIp) {
+                onHold
+                payments {
+                  reference
+                  date
+                  amount
+                  currency
+                  lineItems {
+                    agreementClaimNo
+                    amount
+                    description
+                    marketingYear
+                    scheme
+                  }
+                }
+              }
+            }
+          }
+         `
+}
+
 export function getGetCustomerBusinessesGqlQuery() {
   return `query Query ($crn: ID!) {
           	customer(crn: $crn) {
