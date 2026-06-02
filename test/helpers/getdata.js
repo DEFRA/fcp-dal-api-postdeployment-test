@@ -28,6 +28,13 @@ export function getLandData() {
   return landdata[Math.floor(Math.random() * landdata.length)]
 }
 
+export function getBankAccountData() {
+  const bankdata = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, dataDir + 'bank.json'), 'utf8')
+  )
+  return bankdata[Math.floor(Math.random() * bankdata.length)]
+}
+
 export function getSbiCrnPair() {
   const sbiCrns = JSON.parse(
     fs.readFileSync(
