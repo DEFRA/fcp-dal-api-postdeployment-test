@@ -32,7 +32,7 @@ export function getGetPaymentsGqlQuery() {
                   amount
                   currency
                   lineItems {
-                    agreementClaimNo
+                    agreementNumber
                     amount
                     description
                     marketingYear
@@ -290,8 +290,8 @@ export function getCreateBusinessBankAccountGqlMutation(
   bankSortCode,
   bankCurrency
 ) {
-  return `mutation CreateBusinessCustomerBankDetails(input: { sbi: "${bankSbi}", crn: "${bankCrn}", account: { ukBusiness: {accountHolderName: "${bankAccountHolderName}", accountNumber: "${bankAccountNumber}", bankName: "${bankName}", sortCode: "${bankSortCode}", currency: "${bankCurrency}"}}}) {
-            createBusinessCustomerBankDetails(input: $input) {
+  return `mutation {
+            createBusinessCustomerBankDetails(input: { sbi: "${bankSbi}", crn: "${bankCrn}", account: { ukBusiness: {accountHolderName: "${bankAccountHolderName}", accountNumber: "${bankAccountNumber}", bankName: "${bankName}", sortCode: "${bankSortCode}", currency: ${bankCurrency}}}}) {
               ... on BankDetailsSubmitted {
                 success
               }
