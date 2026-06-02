@@ -281,6 +281,32 @@ export function getUpdateBusinessNameGqlMutation(sbi) {
          `
 }
 
+export function getCreateBusinessBankAccountGqlMutation(
+  bankSbi,
+  bankCrn,
+  bankAccountHolderName,
+  bankAccountNumber,
+  bankName,
+  bankSortCode,
+  bankCurrency
+) {
+  return `mutation CreateBusinessCustomerBankDetails(input: { sbi: "${bankSbi}", crn: "${bankCrn}", account: { ukBusiness: {accountHolderName: "${bankAccountHolderName}", accountNumber: "${bankAccountNumber}", bankName: "${bankName}", sortCode: "${bankSortCode}", currency: "${bankCurrency}"}}}) {
+            createBusinessCustomerBankDetails(input: $input) {
+              ... on BankDetailsSubmitted {
+                success
+              }
+              ... on BankDetailsValidationFailed {
+                message
+                attemptsRemaining
+              }
+              ... on BankDetailsLocked {
+                message
+              }
+            }
+          }
+         `
+}
+
 export function getUpdatePersonGqlMutation(crn) {
   return `mutation {
             updateCustomerAddress(input: { crn: "${crn}", address: { buildingName: "newBuildingName", buildingNumberRange: "newBuildingNumberRange", city: "newCity", country: "newCountry", county: "newCounty", dependentLocality: "newDependentLocality", doubleDependentLocality: "newDoubleDependentLocality", flatName: "newFlatName", line1: "newLine1", line2: "newLine2", line3: "newLine3", line4: "newLine4", line5: "newLine5", pafOrganisationName: "newPafOrganisationName", postalCode: "newPostalCode", street: "newStreet", uprn: "newUprn"} }) {
