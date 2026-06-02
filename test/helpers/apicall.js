@@ -3,7 +3,6 @@ import axios from 'axios'
 const gqlUrl =
   'https://fcp-dal-api.' +
   process.env.ENVIRONMENT +
-  // 'dev' +
   '.cdp-int.defra.cloud/graphql'
 
 export async function makePostCall(

@@ -1,0 +1,11 @@
+[
+  {
+    "SBI": 900000001,
+    "CRN": "1111112200",
+    "accountHolderName": "Acme Farms Ltd",
+    "accountNumber": "11111100",
+    "name": "Match Bank",
+    "sortCode": "111111",
+    "currency": "GBP"
+  }
+]
