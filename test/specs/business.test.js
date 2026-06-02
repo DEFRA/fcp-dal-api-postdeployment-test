@@ -17,13 +17,15 @@ import {
   getGetBusinessesCustomersGqlQuery,
   getGetCustomerBusinessesGqlQuery,
   getGetLandUsesGqlQuery,
-  getGetPaymentsGqlQuery
+  getGetPaymentsGqlQuery,
+  getCreateBusinessBankAccountGqlMutation
 } from '../helpers/graphqlqueries.js'
 import {
   getSbiCrnPair,
   getLandData,
   getCrn,
-  getSbi
+  getSbi,
+  getBankAccountData
 } from '../helpers/getdata.js'
 import { makePostCall } from '../helpers/apicall.js'
 import { expect } from 'chai'
@@ -209,6 +211,31 @@ describe('Update Person', () => {
   it('An existing person can be updated', async () => {
     const crn = getCrn().CRN.toString()
     const businessQuery = getUpdatePersonGqlMutation(crn)
+    const res = await makePostCall(businessQuery)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Create Business Bank Account', () => {
+  it('A business bank account can be created', async () => {
+    const bankData = getBankAccountData()
+    const bankSbi = bankData.SBI.toString()
+    const bankCrn = bankData.CRN.toString()
+    const bankAccountHolderName = bankData.accountHolderName.toString()
+    const bankAccountNumber = bankData.accountNumber.toString()
+    const bankName = bankData.name.toString()
+    const bankSortCode = bankData.sortCode.toString()
+    const bankCurrency = bankData.currency.toString()
+
+    const businessQuery = getCreateBusinessBankAccountGqlMutation(
+      bankSbi,
+      bankCrn,
+      bankAccountHolderName,
+      bankAccountNumber,
+      bankName,
+      bankSortCode,
+      bankCurrency
+    )
     const res = await makePostCall(businessQuery)
     expect(res.status).to.equal(200)
   })
