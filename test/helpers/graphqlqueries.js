@@ -619,3 +619,111 @@ export function getGetBusinessDetailsGqlQuery() {
           }
          `
 }
+
+export function getBusinessSearchGqlQuery() {
+  return `query BusinessSearch(
+              $searchString: String!
+              $searchType: BusinessSearchFieldType!
+              $pagination: Pagination
+            ) {
+              businessSearch(searchString: $searchString, searchType: $searchType, pagination: $pagination) {
+                results {
+                  organisationId
+                  sbi
+                  name
+                  additionalSbis
+                  isFinancialToBusinessAddress
+                  isCorrespondenceAsBusinessAddress
+                  landConfirmed
+                  lastUpdated
+                  status {
+                    locked
+                    confirmed
+                    deactivated
+                  }
+                  address {
+                    pafOrganisationName
+                    line1
+                    line2
+                    line3
+                    line4
+                    line5
+                    buildingNumberRange
+                    buildingName
+                    flatName
+                    street
+                    city
+                    county
+                    postalCode
+                    country
+                    uprn
+                    dependentLocality
+                    doubleDependentLocality
+                    typeId
+                  }
+                  correspondenceAddress {
+                    line1
+                    postalCode
+                  }
+                }
+                pageInfo {
+                  number
+                  size
+                  totalPages
+                  totalElements
+                }
+              }
+            }
+         `
+}
+
+export function getCustomerSearchGqlQuery() {
+  return `query CustomerSearch(
+              $searchString: String!
+              $searchType: CustomerSearchFieldType!
+              $pagination: Pagination
+            ) {
+              customerSearch(searchString: $searchString, searchType: $searchType, pagination: $pagination) {
+                results {
+                  personId
+                  crn
+                  fullName
+                  personalIdentifiers
+                  nationalInsuranceNumber
+                  email
+                  status {
+                    locked
+                    confirmed
+                    deactivated
+                  }
+                  address {
+                    pafOrganisationName
+                    line1
+                    line2
+                    line3
+                    line4
+                    line5
+                    buildingNumberRange
+                    buildingName
+                    flatName
+                    street
+                    city
+                    county
+                    postalCode
+                    country
+                    uprn
+                    dependentLocality
+                    doubleDependentLocality
+                    typeId
+                  }
+                }
+                pageInfo {
+                  number
+                  size
+                  totalPages
+                  totalElements
+                }
+              }
+            }
+         `
+}

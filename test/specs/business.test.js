@@ -18,7 +18,9 @@ import {
   getGetCustomerBusinessesGqlQuery,
   getGetLandUsesGqlQuery,
   getGetPaymentsGqlQuery,
-  getCreateBusinessBankAccountGqlMutation
+  getCreateBusinessBankAccountGqlMutation,
+  getBusinessSearchGqlQuery,
+  getCustomerSearchGqlQuery
 } from '../helpers/graphqlqueries.js'
 import {
   getSbiCrnPair,
@@ -279,6 +281,34 @@ describe('Get a businesses land uses', () => {
       '"}'
 
     const businessQuery = getGetLandUsesGqlQuery()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Search for business details by SBI', () => {
+  it('An SBI search for business details should be returned OK', async () => {
+    const sbi = getSbi().SBI.toString()
+    const jqlVars =
+      '{"searchString":"' +
+      sbi +
+      '","searchType":"SBI", "pagination": {"page": 1,"perPage": 1}}'
+
+    const businessQuery = getBusinessSearchGqlQuery()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Search for customer details by CRN', () => {
+  it('A CRN search for customer details should be returned OK', async () => {
+    const crn = getCrn().CRN.toString()
+    const jqlVars =
+      '{"searchString":"' +
+      crn +
+      '","searchType":"CRN", "pagination": {"page": 1,"perPage": 1}}'
+
+    const businessQuery = getCustomerSearchGqlQuery()
     const res = await makePostCall(businessQuery, jqlVars)
     expect(res.status).to.equal(200)
   })
