@@ -309,9 +309,9 @@ export function getCreateBusinessBankAccountGqlMutation(
 
 export function getUpdatePersonGqlMutation(crn) {
   return `mutation {
-            updateCustomerAddress(input: { crn: "${crn}", address: { buildingName: "newBuildingName", buildingNumberRange: "newBuildingNumberRange", city: "newCity", country: "newCountry", county: "newCounty", dependentLocality: "newDependentLocality", doubleDependentLocality: "newDoubleDependentLocality", flatName: "newFlatName", line1: "newLine1", line2: "newLine2", line3: "newLine3", line4: "newLine4", line5: "newLine5", pafOrganisationName: "newPafOrganisationName", postalCode: "newPostalCode", street: "newStreet", uprn: "newUprn"} }) {
-              success
+            updateCustomerAddress(input: { crn: "${crn}", address: {buildingName: null, buildingNumberRange: null, city: null, country: null, county: null, dependentLocality: null, doubleDependentLocality: null, flatName: null, line1: null, line2: null, line3: null, line4: null, line5: null, pafOrganisationName: null, postalCode: null, street: null, uprn: null } }) {
               customer {
+                personId
                 info {
                   address {
                     pafOrganisationName
@@ -331,9 +331,11 @@ export function getUpdatePersonGqlMutation(crn) {
                     uprn
                     dependentLocality
                     doubleDependentLocality
+                    typeId
                   }
                 }
               }
+              success
             }
           }
          `
