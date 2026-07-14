@@ -20,7 +20,9 @@ import {
   getGetPaymentsGqlQuery,
   getCreateBusinessBankAccountGqlMutation,
   getBusinessSearchGqlQuery,
-  getCustomerSearchGqlQuery
+  getCustomerSearchGqlQuery,
+  getCountriesCurrenciesGqlQuery,
+  getGetBusinessBankAccountsGqlQuery
 } from '../helpers/graphqlqueries.js'
 import {
   getSbiCrnPair,
@@ -39,6 +41,25 @@ describe('Get business details', () => {
 
     const businessQuery = getGetBusinessDetailsGqlQuery()
     const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Get business bank accounts', () => {
+  it('Business bank accounts should be returned OK', async () => {
+    const sbi = getSbi().SBI.toString()
+    const jqlVars = '{ "sbi": "' + sbi + '"}'
+
+    const businessQuery = getGetBusinessBankAccountsGqlQuery()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Get countries currencies', () => {
+  it('Countries currencies should be returned OK', async () => {
+    const businessQuery = getCountriesCurrenciesGqlQuery()
+    const res = await makePostCall(businessQuery)
     expect(res.status).to.equal(200)
   })
 })

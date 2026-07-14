@@ -113,6 +113,18 @@ export function getGetLandUsesGqlQuery() {
          `
 }
 
+export function getCountriesCurrenciesGqlQuery() {
+  return `query ReferenceData {
+              referenceData {
+                countriesCurrencies {
+                  code
+                  currency
+                }
+              }
+            }
+         `
+}
+
 export function getGetAgreementsGqlQuery() {
   return `query Agreements ($sbi: ID!) {
               business(sbi: $sbi) {
@@ -141,6 +153,18 @@ export function getGetAgreementsGqlQuery() {
                       }
                   }
               }
+          }
+         `
+}
+
+export function getGetBusinessBankAccountsGqlQuery() {
+  return `query BankAccounts($sbi: ID!) {
+            business(sbi: $sbi) {
+              bankAccounts {
+                number
+                currency
+              }
+            }
           }
          `
 }
