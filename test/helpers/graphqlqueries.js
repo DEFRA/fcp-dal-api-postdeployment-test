@@ -169,6 +169,18 @@ export function getGetBusinessBankAccountsGqlQuery() {
          `
 }
 
+export function getGetLegalStatusesGqlQuery() {
+  return `query ReferenceData {
+              referenceData {
+                legalStatuses {
+                  code
+                  description
+                }
+              }
+            }
+         `
+}
+
 export function getGetApplicationsGqlQuery() {
   return `query Applications($sbi: ID!) {
             business(sbi: $sbi) {
