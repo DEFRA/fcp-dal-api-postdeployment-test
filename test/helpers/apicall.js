@@ -19,7 +19,7 @@ export async function makePostCall(
       returnRejectedPromiseOnError: true,
       timeout: 600000,
       headers: {
-        Email: 'test.user01@defra.gov.uk',
+        Email: 'TestUser01@defra.gov.uk',
         'Content-type': 'application/json',
         Authorization: 'Bearer ' + process.env.AUTH_TOKEN
       }
