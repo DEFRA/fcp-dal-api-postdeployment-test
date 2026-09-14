@@ -351,7 +351,7 @@ describe('Get permitted functions by SBI', () => {
   it('A query for permitted functions should be returned OK', async () => {
     const sbi = getSbi().SBI.toString()
     const jqlVars =
-      '{"functions":" ["viewLand", "someUnknownFunction"],' +
+      '{"functions": ["viewLand", "someUnknownFunction"],' +
       '"sbi":"' +
       sbi +
       '"}'
