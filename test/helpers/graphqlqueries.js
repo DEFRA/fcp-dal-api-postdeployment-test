@@ -765,3 +765,31 @@ export function getCustomerSearchGqlQuery() {
             }
          `
 }
+
+export function getPermittedFunctionsGqlQuery() {
+  return `query PermittedFunctions($functions: [String!]!, $sbi: ID!) {
+            business(sbi: $sbi) {
+              permittedFunctions(functions: $functions) {
+                name
+                permitted
+              }
+            }
+          }
+         `
+}
+
+export function getIsCustomerEmailRegisteredGqlQuery() {
+  return `query Query($email: String!) {
+            isCustomerEmailRegistered(email: $email)
+          }
+         `
+}
+
+export function getUpdateCustomerEmailGqlMutation() {
+  return `mutation UpdateCustomerEmail($input: UpdateCustomerEmailInput!) {
+            updateCustomerEmail(input: $input) {
+              success
+            }
+          }
+         `
+}

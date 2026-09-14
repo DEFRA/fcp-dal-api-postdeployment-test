@@ -23,7 +23,10 @@ import {
   getCustomerSearchGqlQuery,
   getCountriesCurrenciesGqlQuery,
   getGetBusinessBankAccountsGqlQuery,
-  getGetLegalStatusesGqlQuery
+  getGetLegalStatusesGqlQuery,
+  getPermittedFunctionsGqlQuery,
+  getIsCustomerEmailRegisteredGqlQuery,
+  getUpdateCustomerEmailGqlMutation
 } from '../helpers/graphqlqueries.js'
 import {
   getSbiCrnPair,
@@ -339,6 +342,49 @@ describe('Search for customer details by CRN', () => {
       '","searchType":"CRN", "pagination": {"page": 1,"perPage": 1}}'
 
     const businessQuery = getCustomerSearchGqlQuery()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Get permitted functions by SBI', () => {
+  it('A query for permitted functions should be returned OK', async () => {
+    const sbi = getSbi().SBI.toString()
+    const jqlVars =
+      '{"functions":" ["viewLand", "someUnknownFunction"],' +
+      '"sbi":"' +
+      sbi +
+      '"}'
+
+    const businessQuery = getPermittedFunctionsGqlQuery()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Check to see if an email address is already registered', () => {
+  it('Checking if an email address is a duplicate should be returned OK', async () => {
+    const emailAddress = 'skeleton@the-closet.net'
+    const jqlVars = '{"email": "' + emailAddress + '"}'
+
+    const businessQuery = getIsCustomerEmailRegisteredGqlQuery()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Update an email address', () => {
+  it('Updating an email address should be returned OK', async () => {
+    const emailAddress = 'skeleton1@the-closet.net'
+    const crn = getCrn().CRN.toString()
+    const jqlVars =
+      '{"input": {"crn": "' +
+      crn +
+      '","email": {"address": "' +
+      emailAddress +
+      '"}}}'
+
+    const businessQuery = getUpdateCustomerEmailGqlMutation()
     const res = await makePostCall(businessQuery, jqlVars)
     expect(res.status).to.equal(200)
   })
