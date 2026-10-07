@@ -26,7 +26,8 @@ import {
   getGetLegalStatusesGqlQuery,
   getPermittedFunctionsGqlQuery,
   getIsCustomerEmailRegisteredGqlQuery,
-  getUpdateCustomerEmailGqlMutation
+  getUpdateCustomerEmailGqlMutation,
+  getUpdateLockCustomerGqlMutation
 } from '../helpers/graphqlqueries.js'
 import {
   getSbiCrnPair,
@@ -385,6 +386,18 @@ describe('Update an email address', () => {
       '"}}}'
 
     const businessQuery = getUpdateCustomerEmailGqlMutation()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Update customer lock status', () => {
+  it('Updating a customers lock status should be returned OK', async () => {
+    const crn = getCrn().CRN.toString()
+    const jqlVars =
+      '{"input": {"crn": "' + crn + '","note":"mynote", "reason":"myreason"}}'
+
+    const businessQuery = getUpdateLockCustomerGqlMutation()
     const res = await makePostCall(businessQuery, jqlVars)
     expect(res.status).to.equal(200)
   })

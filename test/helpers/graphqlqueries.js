@@ -793,3 +793,12 @@ export function getUpdateCustomerEmailGqlMutation() {
           }
          `
 }
+
+export function getUpdateLockCustomerGqlMutation() {
+  return `mutation UpdateLockCustomer($input: UpdateLockCustomerInput!) {
+            updateLockCustomer(input: $input) {
+              success
+            }
+          }
+         `
+}
