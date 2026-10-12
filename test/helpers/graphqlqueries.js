@@ -802,3 +802,21 @@ export function getUpdateLockCustomerGqlMutation() {
           }
          `
 }
+
+export function getUpdateUnlockCustomerGqlMutation() {
+  return `mutation UpdateUnlockCustomer($input: UpdateUnlockCustomerInput!) {
+            updateUnlockCustomer(input: $input) {
+              success
+            }
+          }
+         `
+}
+
+export function getDeactivateCustomerGqlMutation() {
+  return `mutation updateDeactivateCustomer($input: UpdateDeactivateCustomerInput!) {
+                updateDeactivateCustomer(input: $input) {
+                  success
+                }
+              }
+         `
+}

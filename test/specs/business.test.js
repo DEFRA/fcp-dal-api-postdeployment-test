@@ -27,7 +27,9 @@ import {
   getPermittedFunctionsGqlQuery,
   getIsCustomerEmailRegisteredGqlQuery,
   getUpdateCustomerEmailGqlMutation,
-  getUpdateLockCustomerGqlMutation
+  getUpdateLockCustomerGqlMutation,
+  getUpdateUnlockCustomerGqlMutation,
+  getDeactivateCustomerGqlMutation
 } from '../helpers/graphqlqueries.js'
 import {
   getSbiCrnPair,
@@ -398,6 +400,30 @@ describe('Update customer lock status', () => {
       '{"input": {"crn": "' + crn + '","note":"mynote", "reason":"myreason"}}'
 
     const businessQuery = getUpdateLockCustomerGqlMutation()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Update customer unlock status', () => {
+  it('Updating a customers unlock status should be returned OK', async () => {
+    const crn = getCrn().CRN.toString()
+    const jqlVars =
+      '{"input": {"crn": "' + crn + '","note":"mynote", "reason":"myreason"}}'
+
+    const businessQuery = getUpdateUnlockCustomerGqlMutation()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Deactivate customer', () => {
+  it('Deactivating a customer should be returned OK', async () => {
+    const crn = getCrn().CRN.toString()
+    const jqlVars =
+      '{"input": {"crn": "' + crn + '","note":"mynote", "reason":"myreason"}}'
+
+    const businessQuery = getDeactivateCustomerGqlMutation()
     const res = await makePostCall(businessQuery, jqlVars)
     expect(res.status).to.equal(200)
   })
