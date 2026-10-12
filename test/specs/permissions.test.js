@@ -11,6 +11,7 @@ describe('Get permissions groups', () => {
     const permissionsQuery = getGetPermissionsGroupsGqlQuery()
     const res = await makePostCall(permissionsQuery)
     expect(res.status).to.equal(200)
+    expect(res.data).to.not.have.property('errors')
   })
 })
 
@@ -25,5 +26,6 @@ describe('Get customers business permission groups', () => {
     const permissionsQuery = getGetCustomersBusinessPermissionsGroupsGqlQuery()
     const res = await makePostCall(permissionsQuery, jqlVars)
     expect(res.status).to.equal(200)
+    expect(res.data).to.not.have.property('errors')
   })
 })
