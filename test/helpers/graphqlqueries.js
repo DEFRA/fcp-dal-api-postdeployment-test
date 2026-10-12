@@ -60,7 +60,7 @@ export function getGetCustomerBusinessesGqlQuery() {
 }
 
 export function getGetCustomersBusinessPermissionsGroupsGqlQuery() {
-  return `query Customer ($crn: ID!, $sbi: ID!) {
+  return `query PermissionGroups($crn: ID!, $sbi: ID!) {
           	customer(crn: $crn) {
           		crn
           		business(sbi: $sbi) {
