@@ -14,6 +14,16 @@ export function getSbi() {
   return sbis[Math.floor(Math.random() * sbis.length)]
 }
 
+export function getDeactivatedSbi() {
+  const sbis = JSON.parse(
+    fs.readFileSync(
+      path.resolve(__dirname, dataDir + 'deactivated-sbi.json'),
+      'utf8'
+    )
+  )
+  return sbis[Math.floor(Math.random() * sbis.length)]
+}
+
 export function getCrn() {
   const crns = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, dataDir + 'crn.json'), 'utf8')

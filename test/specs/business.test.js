@@ -38,7 +38,8 @@ import {
   getLandData,
   getCrn,
   getSbi,
-  getBankAccountData
+  getBankAccountData,
+  getDeactivatedSbi
 } from '../helpers/getdata.js'
 import { makePostCall } from '../helpers/apicall.js'
 import { expect } from 'chai'
@@ -445,7 +446,7 @@ describe('Deactivate business', () => {
 
 describe('Reactivate business', () => {
   it('Reactivating a business should be returned OK', async () => {
-    const sbi = getSbi().SBI.toString()
+    const sbi = getDeactivatedSbi().SBI.toString()
     const jqlVars =
       '{"input": {"sbi": "' + sbi + '","note":"mynote", "reason":"myreason"}}'
 
