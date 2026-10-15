@@ -820,3 +820,47 @@ export function getDeactivateCustomerGqlMutation() {
               }
          `
 }
+
+export function getDeactivateBusinessGqlMutation() {
+  return `mutation DeactivateBusiness($input: UpdateBusinessDeactivateInput!)
+          {
+            updateBusinessDeactivate(input: $input)
+            {
+              success
+              business
+              {
+                sbi
+                info
+                {
+                  status
+                  {
+                    deactivated
+                  }
+                }
+              }
+            }
+          }
+         `
+}
+
+export function getReactivateBusinessGqlMutation() {
+  return `mutation UpdateBusinessReactivate ($input: UpdateBusinessReactivateInput!)
+          {
+            updateBusinessReactivate(input: $input)
+            {
+              success
+              business
+              {
+                sbi
+                info
+                {
+                  status
+                  {
+                    deactivated
+                  }
+                }
+              }
+            }
+          }
+         `
+}
