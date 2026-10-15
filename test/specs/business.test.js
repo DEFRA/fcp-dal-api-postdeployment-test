@@ -29,7 +29,9 @@ import {
   getUpdateCustomerEmailGqlMutation,
   getUpdateLockCustomerGqlMutation,
   getUpdateUnlockCustomerGqlMutation,
-  getDeactivateCustomerGqlMutation
+  getDeactivateCustomerGqlMutation,
+  getDeactivateBusinessGqlMutation,
+  getReactivateBusinessGqlMutation
 } from '../helpers/graphqlqueries.js'
 import {
   getSbiCrnPair,
@@ -424,6 +426,30 @@ describe('Deactivate customer', () => {
       '{"input": {"crn": "' + crn + '","note":"mynote", "reason":"myreason"}}'
 
     const businessQuery = getDeactivateCustomerGqlMutation()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Deactivate business', () => {
+  it('Deactivating a business should be returned OK', async () => {
+    const sbi = getSbi().SBI.toString()
+    const jqlVars =
+      '{"input": {"sbi": "' + sbi + '","note":"mynote", "reason":"myreason"}}'
+
+    const businessQuery = getDeactivateBusinessGqlMutation()
+    const res = await makePostCall(businessQuery, jqlVars)
+    expect(res.status).to.equal(200)
+  })
+})
+
+describe('Reactivate business', () => {
+  it('Reactivating a business should be returned OK', async () => {
+    const sbi = getSbi().SBI.toString()
+    const jqlVars =
+      '{"input": {"sbi": "' + sbi + '","note":"mynote", "reason":"myreason"}}'
+
+    const businessQuery = getReactivateBusinessGqlMutation()
     const res = await makePostCall(businessQuery, jqlVars)
     expect(res.status).to.equal(200)
   })
