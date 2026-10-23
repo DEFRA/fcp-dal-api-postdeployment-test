@@ -864,3 +864,23 @@ export function getReactivateBusinessGqlMutation() {
           }
          `
 }
+
+export function getUpdateCustomerAuthenticationQuestionsGqlMutation() {
+  return `mutation UpdateCustomerAuthenticationQuestions ($input: UpdateCustomerAuthenticationQuestionsInput!)
+          {
+            updateCustomerAuthenticationQuestions(input: $input)
+            {
+              success
+              customer {
+                authenticationQuestions {
+                  isFound
+                  updatedAt
+                  memorableDate
+                  memorableEvent
+                  memorableLocation
+                }
+              }
+            }
+          }
+         `
+}
