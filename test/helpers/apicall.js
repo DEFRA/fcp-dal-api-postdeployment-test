@@ -1,9 +1,12 @@
 import axios from 'axios'
 
+// API_URL overrides the in-platform host, e.g. when running locally:
+// API_URL=https://fcp-dal-api.api.dev.cdp-int.defra.cloud/graphql
 const gqlUrl =
+  process.env.API_URL ||
   'https://fcp-dal-api.' +
-  process.env.ENVIRONMENT +
-  '.cdp-int.defra.cloud/graphql'
+    process.env.ENVIRONMENT +
+    '.cdp-int.defra.cloud/graphql'
 
 export async function makePostCall(
   gqlQueryString,
