@@ -2,6 +2,12 @@
 
 echo "run_id: $RUN_ID"
 
+# TODO: only dev has test data for now; we will need to bring back test, ext-test and perf-test
+if [ "${ENVIRONMENT}" != "dev" ]; then
+  echo "ERROR! No test data for ENVIRONMENT=${ENVIRONMENT}, tests can only run on dev for now"
+  exit 1
+fi;
+
 if [ "${ENVIRONMENT}" = "test" ] || [ "${ENVIRONMENT}" = "ext-test" ] || [ "${ENVIRONMENT}" = "perf-test" ]; then
   # Get an auth token
   auth_url=https://login.microsoftonline.com/${TENANT_ID:?required secret not set!}/oauth2/v2.0/token
