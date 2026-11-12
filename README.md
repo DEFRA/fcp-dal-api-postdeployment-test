@@ -100,6 +100,23 @@ By default, the provided workflow will run when triggered manually from GitHub o
 
 If you want to use the repository exclusively for running docker composed based test suites consider displaying the publish.yml workflow.
 
+## Synthetic CRN/SBI check
+
+A pre-commit hook and the pull request workflow use [fcp-sfd-core](https://github.com/DEFRA/fcp-sfd-core)'s `sfd-id-check` to block 10-digit (CRN) or 9-digit (SBI) numbers outside the synthetic ranges. Use synthetic-range values in test data and examples.
+
+The hook needs Node.js and npm. `.npmrc` sets `ignore-scripts=true`, so install the git hooks yourself once after `npm install`:
+
+```bash
+npm install
+npm run setup:husky
+```
+
+To run the check on staged files by hand:
+
+```bash
+npm run check:synthetic-ids
+```
+
 ## Licence
 
 THIS INFORMATION IS LICENSED UNDER THE CONDITIONS OF THE OPEN GOVERNMENT LICENCE found at:
