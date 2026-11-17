@@ -884,3 +884,16 @@ export function getUpdateCustomerAuthenticationQuestionsGqlMutation() {
           }
          `
 }
+
+export function getCreateCustomerGqlMutation() {
+  return `mutation createCustomer($input: CreateCustomerInput!) {
+                createCustomer(input: $input) {
+                  success
+                  customer {
+                    personId
+                    crn
+                  }
+                }
+              }
+         `
+}

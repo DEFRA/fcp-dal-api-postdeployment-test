@@ -9,9 +9,10 @@ import {
   getUpdateLockCustomerGqlMutation,
   getUpdateUnlockCustomerGqlMutation,
   getDeactivateCustomerGqlMutation,
-  getUpdateCustomerAuthenticationQuestionsGqlMutation
+  getUpdateCustomerAuthenticationQuestionsGqlMutation,
+  getCreateCustomerGqlMutation
 } from '../helpers/graphqlqueries.js'
-import { getCrn } from '../helpers/getdata.js'
+import { getCrn, randomString } from '../helpers/getdata.js'
 import { makePostCall } from '../helpers/apicall.js'
 import { expect } from 'chai'
 
@@ -144,6 +145,22 @@ describe('Update customer authentication questions', () => {
       '","memorableDate":"12-07-83", "memorableEvent":"DOB", "memorableLocation":"South Africa"}}'
 
     const customerQuery = getUpdateCustomerAuthenticationQuestionsGqlMutation()
+    const res = await makePostCall(customerQuery, jqlVars)
+    expect(res.status).to.equal(200)
+    expect(res.data).to.not.have.property('errors')
+  })
+})
+
+describe('Create customer', () => {
+  it('Creating a customer should return OK', async () => {
+    const jqlVars =
+      '{"input": {"first": "Testy' +
+      randomString(5, 15) +
+      '","last": "Tester' +
+      randomString(5, 15) +
+      '}}'
+
+    const customerQuery = getCreateCustomerGqlMutation()
     const res = await makePostCall(customerQuery, jqlVars)
     expect(res.status).to.equal(200)
     expect(res.data).to.not.have.property('errors')
