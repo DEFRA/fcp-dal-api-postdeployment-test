@@ -56,9 +56,9 @@ export function getSbiCrnPair() {
 }
 
 export function randomString(min, max) {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const length = Math.floor(Math.random() * (max - min + 1)) + min;
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const length = Math.floor(Math.random() * (max - min + 1)) + min
   return Array.from({ length }, () =>
     chars.charAt(Math.floor(Math.random() * chars.length))
-  ).join('');
+  ).join('')
 }
