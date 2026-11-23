@@ -202,6 +202,8 @@ describe('Check for customer duplicate', () => {
     const fName = getExistingCustomerDetails().fName.toString()
     const lName = getExistingCustomerDetails().lName.toString()
     const dob = getExistingCustomerDetails().dob.toString()
+    const mobile = getExistingCustomerDetails().mobile.toString()
+    const landline = getExistingCustomerDetails().mobile.toString()
 
     const jqlVars =
       '{"input": {"first": "' +
@@ -210,7 +212,11 @@ describe('Check for customer duplicate', () => {
       lName +
       '", "dateOfBirth":"' +
       dob +
-      '"}}'
+      '", "phone": { "mobile":"' +
+      mobile +
+      '","landline":"' +
+      landline +
+      '"}}}'
 
     const businessQuery = getDuplicateCustomerGqlQuery()
     const res = await makePostCall(businessQuery, jqlVars)
