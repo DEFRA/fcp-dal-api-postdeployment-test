@@ -14,7 +14,7 @@ export function getSbi() {
   return sbis[Math.floor(Math.random() * sbis.length)]
 }
 
-export function getDeactivatedSbi() {
+export function getDeactivateableSbi() {
   const sbis = JSON.parse(
     fs.readFileSync(
       path.resolve(__dirname, dataDir + 'deactivated-sbi.json'),
@@ -27,6 +27,16 @@ export function getDeactivatedSbi() {
 export function getCrn() {
   const crns = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, dataDir + 'crn.json'), 'utf8')
+  )
+  return crns[Math.floor(Math.random() * crns.length)]
+}
+
+export function getLockableCrn() {
+  const crns = JSON.parse(
+    fs.readFileSync(
+      path.resolve(__dirname, dataDir + 'lockable-crn.json'),
+      'utf8'
+    )
   )
   return crns[Math.floor(Math.random() * crns.length)]
 }
@@ -61,4 +71,24 @@ export function randomString(min, max) {
   return Array.from({ length }, () =>
     chars.charAt(Math.floor(Math.random() * chars.length))
   ).join('')
+}
+
+export function getRemoveableSbiCrnPair() {
+  const sbiCrns = JSON.parse(
+    fs.readFileSync(
+      path.resolve(__dirname, dataDir + 'removeable-sbi-crn-pair.json'),
+      'utf8'
+    )
+  )
+  return sbiCrns[Math.floor(Math.random() * sbiCrns.length)]
+}
+
+export function getExistingCustomerDetails() {
+  const customerData = JSON.parse(
+    fs.readFileSync(
+      path.resolve(__dirname, dataDir + 'existing-customer-data.json'),
+      'utf8'
+    )
+  )
+  return customerData[Math.floor(Math.random() * customerData.length)]
 }

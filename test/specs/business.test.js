@@ -29,7 +29,7 @@ import {
   getCrn,
   getSbi,
   getBankAccountData,
-  getDeactivatedSbi
+  getDeactivateableSbi
 } from '../helpers/getdata.js'
 import { makePostCall } from '../helpers/apicall.js'
 import { expect } from 'chai'
@@ -302,24 +302,18 @@ describe('Get permitted functions by SBI', () => {
   })
 })
 
-describe('Deactivate business', () => {
-  it('Deactivating a business should be returned OK', async () => {
-    const sbi = getSbi().SBI.toString()
-    const jqlVars =
-      '{"input": {"sbi": "' + sbi + '","note":"mynote", "reason":"myreason"}}'
+describe('Deactivate and reactivate a business', () => {
+  const sbi = getDeactivateableSbi().SBI.toString()
+  const jqlVars =
+    '{"input": {"sbi": "' + sbi + '","note":"mynote", "reason":"myreason"}}'
 
+  before('Deactivating a business should be returned OK', async () => {
     const businessQuery = getDeactivateBusinessGqlMutation()
     const res = await makePostCall(businessQuery, jqlVars)
     expect(res.status).to.equal(200)
   })
-})
 
-describe('Reactivate business', () => {
   it('Reactivating a business should be returned OK', async () => {
-    const sbi = getDeactivatedSbi().SBI.toString()
-    const jqlVars =
-      '{"input": {"sbi": "' + sbi + '","note":"mynote", "reason":"myreason"}}'
-
     const businessQuery = getReactivateBusinessGqlMutation()
     const res = await makePostCall(businessQuery, jqlVars)
     expect(res.status).to.equal(200)
