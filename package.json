@@ -33,9 +33,7 @@
     "allure-js-commons": "3.14.0",
     "axios": "1.21.1",
     "chai": "6.3.0",
-    "esm-module-alias": "2.2.1",
-    "global-agent": "3.0.0",
-    "undici": "7.30.1"
+    "esm-module-alias": "2.2.1"
   },
   "devDependencies": {
     "allure-mocha": "3.14.0",
