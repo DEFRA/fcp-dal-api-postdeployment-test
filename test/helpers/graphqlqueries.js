@@ -897,3 +897,40 @@ export function getCreateCustomerGqlMutation() {
               }
          `
 }
+
+export function getDeleteCustomerGqlMutation() {
+  return `mutation DeleteCustomerFromBusiness($input: DeleteCustomerFromBusinessInput!) {
+            deleteCustomerFromBusiness(input: $input) {
+              success
+              errorString
+            }
+          }
+         `
+}
+
+export function getAddCustomerGqlMutation() {
+  return `mutation AddCustomerToBusiness($input: CustomerPermissionsAndRelationshipToBusinessInput!) {
+            addCustomerToBusiness(input: $input) {
+              success
+              errorString
+            }
+          }
+         `
+}
+
+export function getDuplicateCustomerGqlQuery() {
+  return `query CustomerDuplicate($input: CustomerDuplicateInput!) {
+            customerDuplicate(input: $input) {
+              crn
+              first
+              last
+              dateOfBirth
+              personId
+              phone {
+                landline
+                mobile
+              }
+            }
+          }
+         `
+}
