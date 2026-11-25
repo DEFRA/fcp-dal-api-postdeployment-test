@@ -44,6 +44,6 @@
     "fcp-sfd-core": "github:DEFRA/fcp-sfd-core#95f58ade56b2d0dd0f15bdcba6a5f37a54bcc939",
     "husky": "9.1.7",
     "mocha": "12.0.3",
-    "prettier": "3.9.10"
+    "prettier": "3.10.1"
   }
 }
