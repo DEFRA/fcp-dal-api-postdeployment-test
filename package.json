@@ -30,13 +30,13 @@
   },
   "dependencies": {
     "allure-commandline": "2.46.1",
-    "allure-js-commons": "3.14.0",
+    "allure-js-commons": "3.15.0",
     "axios": "1.21.1",
     "chai": "6.3.0",
     "esm-module-alias": "2.2.1"
   },
   "devDependencies": {
-    "allure-mocha": "3.14.0",
+    "allure-mocha": "3.15.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-config-standard": "17.1.0",
