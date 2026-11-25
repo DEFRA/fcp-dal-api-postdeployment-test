@@ -189,7 +189,8 @@ describe('Add and Delete customer from business', () => {
   })
 
   it('Deleting a customer from a business should return OK', async () => {
-    const jqlVars = '{ "sbi": "' + rSbi + '", "crn": "' + rCrn + '" }'
+    const jqlVars =
+      '{"input": { "sbi": "' + rSbi + '", "crn": "' + rCrn + '" }}'
     const customerQuery = getDeleteCustomerGqlMutation()
     const res = await makePostCall(customerQuery, jqlVars)
     expect(res.status).to.equal(200)
