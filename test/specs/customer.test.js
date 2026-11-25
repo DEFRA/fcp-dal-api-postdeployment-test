@@ -161,7 +161,7 @@ describe('Create customer', () => {
       randomString(5, 15) +
       '","last": "Tester' +
       randomString(5, 15) +
-      '}}'
+      '"}}'
 
     const customerQuery = getCreateCustomerGqlMutation()
     const res = await makePostCall(customerQuery, jqlVars)
@@ -177,11 +177,11 @@ describe('Add and Delete customer from business', () => {
 
   before('Adding a customer to a business should return OK', async () => {
     const jqlVars =
-      '{ "sbi": "' +
+      '{"input": { "sbi": "' +
       rSbi +
       '", "crn": "' +
       rCrn +
-      '", "role": "Agent", "permissions": [{ "id": "BUSINESS_DETAILS", "level": "FULL_PERMISSION"}]}'
+      '", "role": "Agent", "permissions": [{ "id": "BUSINESS_DETAILS", "level": "FULL_PERMISSION"}]}}'
     const customerQuery = getAddCustomerGqlMutation()
     const res = await makePostCall(customerQuery, jqlVars)
     expect(res.status).to.equal(200)
@@ -203,7 +203,7 @@ describe('Check for customer duplicate', () => {
     const lName = getExistingCustomerDetails().lName.toString()
     const dob = getExistingCustomerDetails().dob.toString()
     const mobile = getExistingCustomerDetails().mobile.toString()
-    const landline = getExistingCustomerDetails().mobile.toString()
+    const landline = getExistingCustomerDetails().landline.toString()
 
     const jqlVars =
       '{"input": {"first": "' +

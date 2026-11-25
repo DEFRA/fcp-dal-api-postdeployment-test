@@ -17,7 +17,7 @@ export function getSbi() {
 export function getDeactivateableSbi() {
   const sbis = JSON.parse(
     fs.readFileSync(
-      path.resolve(__dirname, dataDir + 'deactivated-sbi.json'),
+      path.resolve(__dirname, dataDir + 'deactivateable-sbi.json'),
       'utf8'
     )
   )
